@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>公司简介 - 六盘水华兴物业服务有限公司</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* 复用index.html的基础样式 */
+        body {
+            margin: 0;
+            font-family: "Microsoft YaHei", sans-serif;
+            color: #333;
+        }
+
+        /* 导航栏样式 */
+        .navbar {
+            background-color: #1e4b94;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            padding: 5px 0;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar li {
+            margin: 0 1.5rem;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        .navbar a:hover {
+            color: #ffd700;
+        }
+
+        /* 主要内容样式 */
+        .main-content {
+            margin-top: 80px;
+            padding: 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .section h2 {
+            color: #1e4b94;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #1e4b94;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline-item {
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: #1e4b94;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: -4px;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #1e4b94;
+        }
+
+        .organization-chart {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .org-item {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .honors-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .honors-list li {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+
+        /* 页脚样式 */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 3rem 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #ffd700;
+            margin-top: 0;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        /* 添加到原有的 style 标签中 */
+.organization-chart {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.org-row {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.org-item {
+    width: 250px;
+    margin: 15px;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+    text-align: center;
+}
+
+.org-item:hover {
+    transform: translateY(-5px);
+}
+
+.org-photo {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #1e4b94;
+}
+
+.org-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.org-info h3 {
+    color: #1e4b94;
+    margin: 0 0 5px 0;
+    font-size: 18px;
+}
+
+.org-name {
+    color: #333;
+    font-weight: bold;
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+.org-desc {
+    color: #666;
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.honors-section {
+    padding: 40px 0;
+    background: #f8f9fa;
+}
+
+.honors-section h2 {
+    text-align: center;
+    color: #1e4b94;
+    margin-bottom: 30px;
+}
+
+.honors-carousel {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.carousel-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-slide {
+    min-width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 400px;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.8);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1e4b94;
+    transition: all 0.3s ease;
+}
+
+.carousel-button:hover {
+    background: #1e4b94;
+    color: white;
+}
+
+.carousel-button.prev {
+    left: 10px;
+}
+
+.carousel-button.next {
+    right: 10px;
+}
+
+.carousel-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+}
+
+.carousel-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.carousel-dot.active {
+    background: #1e4b94;
+}
+/* 返回顶部按钮样式 */
+.back-to-top {
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    background: #1e4b94;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 999;
+    transition: all 0.3s ease;
+}
+
+.back-to-top:hover {
+    background: #153670;
+    transform: translateY(-3px);
+}
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="logo.png.jpg" alt="六盘水华兴物业服务有限公司" />
+            </div>
+            <ul>
+                <li><a href="index.html">首页</a></li>
+                <li><a href="about.html">公司简介</a></li>
+                <li><a href="services.html">服务项目</a></li>
+                <li><a href="community.html">小区信息</a></li>
+                <li><a href="notices.html">通知公告</a></li>
+                <li><a href="news.html">新闻动态</a></li>
+                <li><a href="online-services.html">在线服务</a></li>
+                <li><a href="interaction.html">互动交流</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 主要内容 -->
+    <div class="main-content">
+        <!-- 发展历程 -->
+        <section class="section">
+            <h2>发展历程</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                	<h3>2015年</h3>
+                	<p>公司成立，正式进入物业行业</p>
+                </div>
+                <div class="timeline-item">
+                	<h3>2016年</h3>
+                	<p></p>
+                </div>
+                <div class="timeline-item">
+                	<h3>2017年</h3>
+                	<p></p>
+                </div>
+                <div class="timeline-item">
+                	<h3>2018年</h3>
+                	<p></p>
+                </div>
+                <div class="timeline-item">
+                	<h3>2019年</h3>
+                	<p></p>
+                </div>
+                <div class="timeline-item">
+                    <h3>2020年</h3>
+                    <p>开始为六盘水市多个住宅小区提供物业服务</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>2021年</h3>
+                    <p>服务范围扩大，新增商业物业管理业务</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>2022年</h3>
+                    <p>引入智能化管理系统，提升服务效率</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>2023年</h3>
+                    <p>荣获"优秀物业服务企业"称号</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 企业文化 -->
+        <section class="section">
+            <h2>企业文化</h2>
+            <h3>企业使命</h3>
+            <p>为业主创造舒适、安全、温馨的生活环境</p>
+            <h3>企业愿景</h3>
+            <p>成为六盘水地区最具影响力的物业服务企业</p>
+            <h3>核心价值观</h3>
+            <p>诚信、专业、创新、共赢</p>
+        </section>
+
+        <!-- 服务理念 -->
+        <section class="section">
+            <h2>服务理念</h2>
+            <p>以业主需求为导向，提供专业、贴心的物业服务</p>
+            <p>注重服务细节，持续改进服务品质</p>
+            <p>建立和谐社区关系，促进邻里互助</p>
+        </section>
+
+        <!-- 组织架构 -->
+        <!-- 修改组织架构部分的代码 -->
+<section class="section">
+    <h2>主要人员</h2>
+    <div class="organization-chart">
+        <div class="org-row">
+            <!-- 总经理 -->
+            <div class="org-item">
+                <div class="org-photo">
+                    <img src="images/manager1.jpg" alt="总经理照片">
+                </div>
+                <div class="org-info">
+                    <h3>总经理</h3>
+                    <p class="org-name">陈光华</p>
+                    <p class="org-desc">负责公司整体运营管理</p>
+                </div>
+            </div>
+
+            <!-- 人事部经理 -->
+            <div class="org-item">
+                <div class="org-photo">
+                    <img src="images/manager2.jpg" alt="人事部经理照片">
+                </div>
+                <div class="org-info">
+                    <h3>人事部经理</h3>
+                    <p class="org-name">刘德群</p>
+                    <p class="org-desc">负责人力资源管理</p>
+                </div>
+            </div>
+
+            <!-- 财务经理 -->
+            <div class="org-item">
+                <div class="org-photo">
+                    <img src="images/manager3.jpg" alt="财务经理照片">
+                </div>
+                <div class="org-info">
+                    <h3>财务经理</h3>
+                    <p class="org-name">陈锬</p>
+                    <p class="org-desc">负责财务核算管理</p>
+                </div>
+            </div>
+
+            <!-- 工程经理 -->
+            <div class="org-item">
+                <div class="org-photo">
+                    <img src="images/manager4.jpg" alt="工程经理照片">
+                </div>
+                <div class="org-info">
+                    <h3>工程经理</h3>
+                    <p class="org-name">陈明毅</p>
+                    <p class="org-desc">负责工程维护管理</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="org-row">
+            <!-- 客服经理 -->
+            <div class="org-item">
+                <div class="org-photo">
+                    <img src="images/manager5.jpg" alt="客服经理照片">
+                </div>
+                <div class="org-info">
+                    <h3>客服经理</h3>
+                    <p class="org-name">王蓝馨</p>
+                    <p class="org-desc">负责客户服务管理</p>
+                </div>
+            </div>
+
+            <!-- 安保经理 -->
+            <div class="org-item">
+                <div class="org-photo">
+                    <img src="images/manager6.jpg" alt="安保经理照片">
+                </div>
+                <div class="org-info">
+                    <h3>安保经理</h3>
+                    <p class="org-name">王旋</p>
+                    <p class="org-desc">负责安全保卫工作</p>
+                </div>
+            </div>
+
+            <!-- 环境经理 -->
+            <div class="org-item">
+                <div class="org-photo">
+                    <img src="images/manager7.jpg" alt="环境经理照片">
+                </div>
+                <div class="org-info">
+                    <h3>环境经理</h3>
+                    <p class="org-name">陈燊</p>
+                    <p class="org-desc">负责环境卫生管理</p>
+                </div>
+            </div>
+
+            <!-- 品质管理经理 -->
+            <div class="org-item">
+                <div class="org-photo">
+                    <img src="images/manager8.jpg" alt="品质管理经理照片">
+                </div>
+                <div class="org-info">
+                    <h3>品质管理经理</h3>
+                    <p class="org-name">陈才</p>
+                    <p class="org-desc">负责服务品质管理</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+        <!-- 所获荣誉 -->
+    
+        <section class="honors-section">
+            <h2>所获荣誉</h2>
+            <div class="honors-carousel">
+                <div class="carousel-container">
+                    <div class="carousel-track">
+                        <div class="carousel-slide">
+                            <img src="荣誉墙/图片1.png" alt="荣誉证书1">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="荣誉墙/图片2.png" alt="荣誉证书2">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="荣誉墙/图片3.png" alt="荣誉证书3">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="荣誉墙\图片4.png" alt="荣誉证书4">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="荣誉墙/图片5.png" alt="荣誉证书5">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="荣誉墙/图片6.png" alt="荣誉证书6">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="荣誉墙/图片7.png" alt="荣誉证书7">
+                        </div>
+                    </div>
+                    <button class="carousel-button prev">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="carousel-button next">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <div class="carousel-dots"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>联系我们</h3>
+                <p>地址：贵州省六盘水市钟山区大街城西路2号搬迁街</p>
+                <p>电话：13158289988</p>
+                <p>邮箱：1318940380@qq.com</p>
+            </div>
+            <div class="footer-section">
+                <h3>服务时间</h3>
+                <p>周一至周日</p>
+                <p>24小时服务</p>
+            </div>
+            <div class="footer-section">
+                <h3>关注我们</h3>
+                <p>微信公众号：六盘水华兴物业服务有限公司</p>
+                <p>服务热线：17708587286</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>版权所有 © 2025 六盘水华兴物业服务有限公司</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const track = document.querySelector('.carousel-track');
+            const slides = document.querySelectorAll('.carousel-slide');
+            const prevButton = document.querySelector('.carousel-button.prev');
+            const nextButton = document.querySelector('.carousel-button.next');
+            const dotsContainer = document.querySelector('.carousel-dots');
+            
+            let currentIndex = 0;
+            let autoplayInterval;
+
+            // 创建轮播点
+            slides.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.classList.add('carousel-dot');
+                if (index === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(index));
+                dotsContainer.appendChild(dot);
+            });
+
+            // 更新轮播点
+            function updateDots() {
+                document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentIndex);
+                });
+            }
+
+            // 切换到指定幻灯片
+            function goToSlide(index) {
+                currentIndex = index;
+                track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                updateDots();
+                resetAutoplay();
+            }
+
+            // 上一张
+            prevButton.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                goToSlide(currentIndex);
+            });
+
+            // 下一张
+            nextButton.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % slides.length;
+                goToSlide(currentIndex);
+            });
+
+            // 自动播放
+            function startAutoplay() {
+                autoplayInterval = setInterval(() => {
+                    currentIndex = (currentIndex + 1) % slides.length;
+                    goToSlide(currentIndex);
+                }, 4000);
+            }
+
+            function resetAutoplay() {
+                clearInterval(autoplayInterval);
+                startAutoplay();
+            }
+
+            // 鼠标悬停时暂停自动播放
+            const carousel = document.querySelector('.carousel-container');
+            carousel.addEventListener('mouseenter', () => clearInterval(autoplayInterval));
+            carousel.addEventListener('mouseleave', startAutoplay);
+
+            // 开始自动播放
+            startAutoplay();
+        });
+        // 返回顶部功能
+window.onscroll = function() {
+    const backToTop = document.querySelector('.back-to-top');
+    if (window.scrollY > 300) {
+        backToTop.style.display = 'flex';
+    } else {
+        backToTop.style.display = 'none';
+    }
+};
+
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+    </script>
+     <!-- 返回顶部按钮 -->
+        <div class="back-to-top" onclick="scrollToTop()">
+            <i class="fas fa-arrow-up"></i>
+        </div>
+</body>
+</html>

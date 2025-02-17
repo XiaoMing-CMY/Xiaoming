@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>六盘水华兴物业服务有限公司</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* 保持原有的所有CSS样式 */
+        
+        /* 添加AI客服样式 */
+        .ai-assistant-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #1e4b94;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.3s;
+        }
+
+        .ai-assistant-button:hover {
+            transform: translateY(-3px);
+        }
+
+        .chat-window {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            display: none;
+            flex-direction: column;
+            z-index: 1000;
+        }
+
+        .chat-window.active {
+            display: flex;
+        }
+
+        .chat-header {
+            padding: 15px;
+            background: #1e4b94;
+            color: white;
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close-button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+        }
+
+        .message {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .message.user {
+            flex-direction: row-reverse;
+        }
+
+        .message-content {
+            background: #f0f2f5;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+
+        .message.user .message-content {
+            background: #1e4b94;
+            color: white;
+        }
+
+        .chat-input {
+            padding: 15px;
+            border-top: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .message-input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+        }
+
+        .send-button {
+            background: #1e4b94;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .typing-indicator {
+            display: flex;
+            gap: 3px;
+        }
+
+        .typing-indicator span {
+            width: 8px;
+            height: 8px;
+            background: #90a4ae;
+            border-radius: 50%;
+            animation: typing 1s infinite ease-in-out;
+        }
+
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+    </style>
+</head>
+<body>
+    <!-- 保持原有的所有HTML内容不变，在</body>标签前添加以下内容 -->
+
+    <!-- AI客服悬浮按钮和聊天窗口 -->
+    <div class="ai-assistant-button" onclick="toggleChat()">
+        <i class="fas fa-robot"></i>
+        <span>智能客服</span>
+    </div>
+
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+            <h3>智能客服助手</h3>
+            <button class="close-button" onclick="toggleChat()">×</button>
+        </div>
+        <div class="chat-messages"></div>
+        <div class="chat-input">
+            <div class="input-tools">
+                <button class="tool-button" title="语音输入" onclick="startVoiceRecognition()">
+                    <i class="fas fa-microphone"></i>
+                </button>
+            </div>
+            <input type="text" class="message-input" placeholder="请输入您的问题...">
+            <button class="send-button" onclick="sendMessage()">发送</button>
+        </div>
+    </div>
+
+    <!-- 添加AI客服脚本 -->
+    <script>
+        // 知识库
+        const knowledgeBase = {
+            // 公司职务信息
+            "总经理": "我们公司的总经理是张三，负责公司整体运营管理。",
+            "副总经理": "我们公司的副总经理是李四，协助总经理开展工作。",
+            "人事主管": "我们公司的人事主管是王五，负责人力资源管理工作。",
+            "财务主管": "我们公司的财务主管是赵六，负责公司财务工作。",
+            "客服主管": "我们公司的客服主管是钱七，负责客户服务工作。",
+            "工程部主管": "我们公司的工程部主管是周八，负责小区维修养护工作。",
+            "保安队长": "我们公司的保安队长是吴九，负责小区安保工作。",
+            
+            // 物业服务相关
+            "物业费": "我们小区的物业费标准是：住宅3元/平方米/月，商铺5元/平方米/月。",
+            "维修": "如需报修，请拨打24小时维修热线：17708587286",
+            "停车": "小区内设有地下停车场和地面停车位，月租金：地下280元/月，地面200元/月。",
+            
+            // 投诉建议
+            "投诉": "您可以拨打投诉热线：13158289988，或到物业服务中心现场反映问题。",
+            "建议": "感谢您的建议，您可以通过以下方式反馈：1. 物业服务中心 2. 投诉热线 3. 微信公众号",
+            
+            // 其他服务
+            "装修": "装修时间：周一至周五 9:00-18:00，需要提前到物业服务中心登记备案。",
+            "快递": "小区设有智能快递柜，位于各单元门口，也可以到物业服务中心代收。"
+        };
+
+        // 切换聊天窗口显示状态
+        function toggleChat() {
+            const chatWindow = document.getElementById('chatWindow');
+            chatWindow.classList.toggle('active');
+            if (chatWindow.classList.contains('active')) {
+                // 显示欢迎消息
+                addMessage("您好！我是华兴物业的智能客服助手，很高兴为您服务。请问有什么可以帮您？", false);
+            }
+        }
+
+        // 添加消息到聊天界面
+        function addMessage(text, isUser) {
+            const messagesContainer = document.querySelector('.chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user' : ''}`;
+            messageDiv.innerHTML = `<div class="message-content">${text}</div>`;
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        // 添加正在输入提示
+        function addTypingIndicator() {
+            const messagesContainer = document.querySelector('.chat-messages');
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message typing';
+            typingDiv.innerHTML = `
+                <div class="message-content">
+                    <div class="typing-indicator">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            `;
+            messagesContainer.appendChild(typingDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        // 移除正在输入提示
+        function removeTypingIndicator() {
+            const typingIndicator = document.querySelector('.typing');
+            if (typingIndicator) {
+                typingIndicator.remove();
+            }
+        }
+
+        // 查找答案
+        function findAnswer(question) {
+            // 处理职务相关问题
+            if (question.includes("谁") && (question.includes("是") || question.includes("担任"))) {
+                for (let key in knowledgeBase) {
+                    if (question.includes(key)) {
+                        return knowledgeBase[key];
+                    }
+                }
+            }
+            
+            // 常规问题匹配
+            for (let key in knowledgeBase) {
+                if (question.includes(key)) {
+                    return knowledgeBase[key];
+                }
+            }
+            
+            return "抱歉，我可能没有理解您的问题。您可以换个方式描述，或直接联系物业服务中心：13158289988";
+        }
+
+        // 发送消息处理
+        function sendMessage() {
+            const input = document.querySelector('.message-input');
+            const message = input.value.trim();
+            
+            if (message) {
+                addMessage(message, true);
+                input.value = '';
+                
+                addTypingIndicator();
+                
+                // 模拟AI思考时间
+                setTimeout(() => {
+                    removeTypingIndicator();
+                    const answer = findAnswer(message);
+                    addMessage(answer, false);
+                }, 1000);
+            }
+        }
+
+        // 语音识别功能
+        function startVoiceRecognition() {
+            if ('webkitSpeechRecognition' in window) {
+                const recognition = new webkitSpeechRecognition();
+                recognition.lang = 'zh-CN';
+                recognition.continuous = false;
+                recognition.interimResults = false;
+
+                recognition.onstart = () => {
+                    addMessage("正在听您说...", false);
+                };
+
+                recognition.onresult = (event) => {
+                    const text = event.results[0][0].transcript;
+                    document.querySelector('.message-input').value = text;
+                    sendMessage();
+                };
+
+                recognition.onerror = (event) => {
+                    addMessage("抱歉，语音识别出现错误，请重试。", false);
+                };
+
+                recognition.start();
+            } else {
+                addMessage("您的浏览器不支持语音识别功能。", false);
+            }
+        }
+
+        // 绑定回车发送
+        document.querySelector('.message-input').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>

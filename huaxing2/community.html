@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小区信息 - 六盘水华兴物业服务有限公司</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* 基础样式 */
+        body {
+            margin: 0;
+            font-family: "Microsoft YaHei", sans-serif;
+            color: #333;
+        }
+
+        /* 导航栏样式 */
+        .navbar {
+            background-color: #1e4b94;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            padding: 5px 0;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar li {
+            margin: 0 1.5rem;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        .navbar a:hover {
+            color: #ffd700;
+        }
+
+        /* 页面内容样式 */
+        .community-header {
+            margin-top: 60px;
+            background: linear-gradient(rgba(30, 75, 148, 0.9), rgba(30, 75, 148, 0.9)), url('images/community-bg.jpg');
+            background-size: cover;
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .community-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .community-content {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .community-section {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            padding: 2rem;
+        }
+
+        .overview-text {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .community-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .area-title {
+            color: #1e4b94;
+            font-size: 20px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #1e4b94;
+        }
+
+        .community-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .community-item {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .community-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .community-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .community-details {
+            padding: 15px;
+        }
+
+        .community-details h4 {
+            color: #1e4b94;
+            margin: 0 0 10px 0;
+        }
+
+        .facility-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .facility-item {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .facility-item i {
+            font-size: 2.5rem;
+            color: #1e4b94;
+            margin-bottom: 1rem;
+        }
+
+        /* 页脚样式 */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 3rem 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #ffd700;
+            margin-top: 0;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+    /* ... 其他样式 ... */
+
+    /* 返回顶部按钮样式 */
+    .back-to-top {
+        position: fixed;
+        bottom: 100px;
+        right: 30px;
+        background: #1e4b94;
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        z-index: 999;
+        transition: all 0.3s ease;
+    }
+
+    .back-to-top:hover {
+        background: #153670;
+        transform: translateY(-3px);
+    }
+
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+        /* ... 响应式样式 ... */
+    }
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .navbar ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .navbar li {
+                margin: 0.5rem 0;
+            }
+
+            .community-header {
+                padding: 3rem 1rem;
+            }
+
+            .community-header h1 {
+                font-size: 2rem;
+            }
+           
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="logo.png.jpg" alt="六盘水华兴物业服务有限公司" />
+            </div>
+            <ul>
+                <li><a href="index.html">首页</a></li>
+                <li><a href="about.html">公司简介</a></li>
+                <li><a href="services.html">服务项目</a></li>
+                <li><a href="community.html">小区信息</a></li>
+                <li><a href="notices.html">通知公告</a></li>
+                <li><a href="news.html">新闻动态</a></li>
+                <li><a href="online-services.html">在线服务</a></li>
+                <li><a href="interaction.html">互动交流</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 页面头部 -->
+    <header class="community-header">
+        <h1>小区信息</h1>
+        <p>为您提供优质的居住环境</p>
+    </header>
+
+    <!-- 主要内容 -->
+    <div class="community-content">
+        <!-- 项目概况 -->
+        <section class="community-section">
+            <h2>物业服务项目概况</h2>
+            <div class="overview-text">
+                六盘水华兴物业服务有限责任公司目前承接的物业项目有钟山区黄土坡的华飞大厦小区、印象荷城小区、金山豪景小区，锦华新时代小区，欣桂园，景合上城小区，盘州市亦资街道办的云海花园小区、锦程公寓小区、翰林街道办的盘龙花园小区、花半里小区、金泽芳庭小区，湖光家园小区、华泰阳光小区、恒泰公寓小区、赫章的新天地小区等共十六个项目，共承接项目面积141.35万平方米。
+            </div>
+
+            <div class="community-grid">
+                <!-- 钟山区项目 -->
+                <div class="community-card">
+                    <h3 class="area-title">钟山区项目</h3>
+                    <div class="community-item">
+                        <img src="images/huafei.jpg" alt="华飞大厦小区" class="community-image">
+                        <div class="community-details">
+                            <h4>华飞大厦小区</h4>
+                            <p>位置：钟山区黄土坡</p>
+                        </div>
+                    </div>
+                    <!-- 其他钟山区小区 -->
+                    <div class="community-item">
+                        <img src="images/yinxiang.jpg" alt="印象荷城小区" class="community-image">
+                        <div class="community-details">
+                            <h4>印象荷城小区</h4>
+                            <p>位置：钟山区黄土坡</p>
+                        </div>
+                    </div>
+                    <div class="community-item">
+                    	<img src="jinshanhaojing.jpg" alt="金山豪景小区" class="community-image">
+                    	<div class="community-details">
+                    		<h4>金山豪景小区</h4>
+                    		<p>位置：钟山区南环路</p>
+                    	</div>
+                    </div>
+                    <div class="community-item">
+                    	<img src="jinhuaxinshidai.jpg" alt="锦华新时代小区" class="community-image">
+                    	<div class="community-details">
+                    		<h4>锦华新时代小区</h4>
+                    		<p>位置：钟山区凤凰山</p>
+                    	</div>
+                    </div>
+                    <div class="community-item">
+                    	<img src="xinguiyuan.jpg" alt="欣桂园小区" class="community-image">
+                    	<div class="community-details">
+                    		<h4>欣桂园小区</h4>
+                    		<p>位置：钟山区凤凰山</p>
+                    	</div>
+                    </div>
+                    <div class="community-item">
+                    	<img src="jinheshangcheng.jpg" alt="景合上城小区" class="community-image">
+                    	<div class="community-details">
+                    		<h4>景合上城小区</h4>
+                    		<p>位置：钟山区黄土坡</p>
+                    	</div>
+                    </div>
+                </div>
+
+                <!-- 盘州市项目 -->
+                <div class="community-card">
+                    <h3 class="area-title">盘州市项目</h3>
+                   
+                    <div class="community-item">
+                        <img src="images/yunhai.jpg" alt="云海花园小区" class="community-image">
+                        <div class="community-details">
+                            <h4>云海花园小区</h4>
+                            <p>位置：亦资街道办</p>
+                        </div>
+                    </div>
+                    <div class="community-item">
+                        <img src="images/panlong.jpg" alt="盘龙花园小区" class="community-image">
+                        <div class="community-details">
+                            <h4>盘龙花园小区</h4>
+                            <p>位置：翰林街道办</p>
+                        </div>
+                    </div>
+                    <div class="community-item">
+                        <img src="jinchenggongyuxiaoqu.jpg" alt="锦程公寓小区" class="community-image">
+                        <div class="community-details">
+                            <h4>锦城公寓小区</h4>
+                            <p>位置：亦资街道办</p>
+                        </div>
+                    </div>
+                    <div class="community-item">
+                        <img src="huabanli.jpg" alt="花半里小区" class="community-image">
+                        <div class="community-details">
+                            <h4>花半里小区</h4>
+                            <p>位置：翰林街道办</p>
+                        </div>
+                    </div>
+                    <div class="community-item">
+                        <img src="jinzefangtin.jpg" alt="金泽芳庭小区" class="community-image">
+                        <div class="community-details">
+                            <h4>金泽芳庭小区</h4>
+                            <p>位置：翰林街道办</p>
+                        </div>
+                    </div>
+                    <div class="community-item">
+                        <img src="huguangjiayuan.jpg" alt="湖光家园小区" class="community-image">
+                        <div class="community-details">
+                            <h4>湖光家园小区</h4>
+                            <p>位置：翰林街道办</p>
+                        </div>
+                    </div>
+                    <div class="community-item">
+                        <img src="huataiyangguang.jpg" alt="华泰阳光小区" class="community-image">
+                        <div class="community-details">
+                            <h4>华泰阳光小区</h4>
+                            <p>位置：翰林街道办</p>
+                        </div>
+                    </div>
+                    <div class="community-item">
+                        <img src="hengtaigongyu.jpg" alt="恒泰公寓小区" class="community-image">
+                        <div class="community-details">
+                            <h4>恒泰公寓小区</h4>
+                            <p>位置：翰林街道办</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 赫章项目 -->
+                <div class="community-card">
+                    <h3 class="area-title">赫章项目</h3>
+                    <div class="community-item">
+                        <img src="images/xintiandi.jpg" alt="新天地小区" class="community-image">
+                        <div class="community-details">
+                            <h4>新天地小区</h4>
+                            <p>位置：赫章县</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 配套设施 -->
+        <section class="community-section">
+            <h2>配套设施</h2>
+            <div class="facility-grid">
+                <div class="facility-item">
+                    <i class="fas fa-car"></i>
+                    <h3>停车场</h3>
+                    <p>地下停车位800个，地面停车位200个</p>
+                </div>
+                <div class="facility-item">
+                    <i class="fas fa-dumbbell"></i>
+                    <h3>健身设施</h3>
+                    <p>室外健身器材区，室内健身房</p>
+                </div>
+                <div class="facility-item">
+                    <i class="fas fa-tree"></i>
+                    <h3>休闲区域</h3>
+                    <p>社区公园，儿童游乐场</p>
+                </div>
+                <div class="facility-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>安防设施</h3>
+                    <p>24小时监控系统，门禁系统</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>联系我们</h3>
+                <p>地址：贵州省六盘水市钟山区大街城西路2号搬迁街</p>
+                <p>电话：13158289988</p>
+                <p>邮箱：1318940380@qq.com</p>
+            </div>
+            <div class="footer-section">
+                <h3>服务时间</h3>
+                <p>周一至周日</p>
+                <p>24小时服务</p>
+            </div>
+            <div class="footer-section">
+                <h3>关注我们</h3>
+                <p>微信公众号：六盘水华兴物业服务有限公司</p>
+                <p>服务热线：17708587286</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>版权所有 © 2024 六盘水华兴物业服务有限公司</p>
+        </div>
+    </footer>
+    <!-- 返回顶部按钮 -->
+<div class="back-to-top" onclick="scrollToTop()">
+    <i class="fas fa-arrow-up"></i>
+</div>
+
+    <script>
+    // 返回顶部功能
+    window.onscroll = function() {
+        const backToTop = document.querySelector('.back-to-top');
+        if (window.scrollY > 300) {
+            backToTop.style.display = 'flex';
+        } else {
+            backToTop.style.display = 'none';
+        }
+    };
+
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+</script>
+</body>
+</html>

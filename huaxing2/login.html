@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户登录 - 六盘水华兴物业服务有限公司</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: "Microsoft YaHei", sans-serif;
+            color: #333;
+            background: linear-gradient(135deg, #1e4b94, #3a6fc9);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 420px;
+            margin: 20px;
+            padding: 2.5rem;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .login-header img {
+            height: 70px;
+            margin-bottom: 1.2rem;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+
+        .login-header h2 {
+            color: #1e4b94;
+            font-size: 1.8rem;
+            margin: 0;
+        }
+
+        .form-group {
+            margin-bottom: 1.8rem;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.6rem;
+            color: #1e4b94;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 1rem;
+            padding-left: 2.5rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group i {
+            position: absolute;
+            left: 1rem;
+            top: 2.7rem;
+            color: #1e4b94;
+        }
+
+        .form-group input:focus {
+            border-color: #1e4b94;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(30, 75, 148, 0.1);
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 1rem;
+            background: #1e4b94;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background: #163a75;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(30, 75, 148, 0.2);
+        }
+
+        .login-footer {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .login-footer a {
+            color: #1e4b94;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .login-footer a:hover {
+            color: #163a75;
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: #dc3545;
+            background: #ffe0e3;
+            padding: 0.8rem;
+            border-radius: 6px;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            display: none;
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <img src="logo.png.jpg" alt="六盘水华兴物业服务有限公司">
+            <h2>用户登录</h2>
+        </div>
+        <div id="error-message" class="error-message"></div>
+        <form id="login-form" onsubmit="return handleLogin(event)">
+            <div class="form-group">
+                <label for="username">用户名</label>
+                <i class="fas fa-user"></i>
+                <input type="text" id="username" name="username" required placeholder="请输入用户名">
+            </div>
+            <div class="form-group">
+                <label for="password">密码</label>
+                <i class="fas fa-lock"></i>
+                <input type="password" id="password" name="password" required placeholder="请输入密码">
+            </div>
+            <button type="submit" class="submit-button">
+                登录
+            </button>
+        </form>
+        <div class="login-footer">
+            <p>还没有账号？<a href="register.html">立即注册</a></p>
+            <p><a href="index.html">返回首页</a></p>
+        </div>
+    </div>
+
+    <script>
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('error-message');
+
+            // 简单的前端验证
+            if (!username || !password) {
+                errorMessage.style.display = 'block';
+                errorMessage.textContent = '请填写完整的登录信息';
+                return false;
+            }
+
+            // 这里应该发送到后端进行验证
+            // 示例代码仅作演示
+            if (username === 'admin' && password === 'admin123') {
+                localStorage.setItem('userLoggedIn', 'true');
+                localStorage.setItem('username', username);
+                
+                // 检查用户是否已完善信息
+                const userInfoCompleted = localStorage.getItem('userInfoCompleted');
+                
+                if (!userInfoCompleted) {
+                    // 如果未完善信息，跳转到信息完善页面
+                    window.location.href = 'user-info.html';
+                } else {
+                    // 如果已完善信息，跳转到首页
+                    window.location.href = 'index.html';
+                }
+            } else {
+                errorMessage.style.display = 'block';
+                errorMessage.textContent = '用户名或密码错误';
+                errorMessage.style.animation = 'none';
+                setTimeout(() => errorMessage.style.animation = 'shake 0.5s ease-in-out', 10);
+            }
+        }
+    </script>
+</body>
+</html> 

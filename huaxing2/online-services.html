@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在线服务 - 六盘水华兴物业服务有限公司</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* 复用基础样式 */
+        body {
+            margin: 0;
+            font-family: "Microsoft YaHei", sans-serif;
+            color: #333;
+        }
+
+        /* 导航栏样式 */
+        .navbar {
+            background-color: #1e4b94;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            padding: 5px 0;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar li {
+            margin: 0 1.5rem;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        .navbar a:hover {
+            color: #ffd700;
+        }
+
+        /* 在线服务页面特定样式 */
+        .services-header {
+            margin-top: 60px;
+            background: linear-gradient(rgba(30, 75, 148, 0.9), rgba(30, 75, 148, 0.9)), url('images/online-services-bg.jpg');
+            background-size: cover;
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .services-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .services-content {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem auto;
+            max-width: 1200px;
+            padding: 0 2rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            background: #1e4b94;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .service-icon i {
+            font-size: 3rem;
+        }
+
+        .service-details {
+            padding: 1.5rem;
+        }
+
+        .service-details h3 {
+            color: #1e4b94;
+            margin-top: 0;
+        }
+
+        .service-button {
+            display: inline-block;
+            background: #1e4b94;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-top: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .service-button:hover {
+            background: #163a75;
+        }
+
+        /* 表单样式 */
+        .form-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-top: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #1e4b94;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        .submit-button {
+            background: #1e4b94;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .submit-button:hover {
+            background: #163a75;
+        }
+
+        /* 页脚样式 */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 3rem 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #ffd700;
+            margin-top: 0;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .navbar ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .navbar li {
+                margin: 0.5rem 0;
+            }
+
+            .services-header {
+                padding: 3rem 1rem;
+            }
+
+            .services-header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* 服务状态跟踪 */
+        .service-history {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .history-item {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .history-item:last-child {
+            border-bottom: none;
+        }
+
+        .status-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            margin-left: 1rem;
+        }
+
+        .status-pending {
+            background: #ffeeba;
+            color: #856404;
+        }
+
+        .status-processing {
+            background: #b8daff;
+            color: #004085;
+        }
+
+        .status-completed {
+            background: #c3e6cb;
+            color: #155724;
+        }
+
+        /* 聊天窗口样式 */
+        .chat-window {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: none;
+            z-index: 1000;
+        }
+
+        .chat-header {
+            background: #1e4b94;
+            color: white;
+            padding: 1rem;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-messages {
+            height: 300px;
+            padding: 1rem;
+            overflow-y: auto;
+        }
+
+        .chat-input {
+            padding: 1rem;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        /* 登录提示弹窗 */
+        .login-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .modal-button {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .login-btn {
+            background: #1e4b94;
+            color: white;
+        }
+
+        .register-btn {
+            background: #28a745;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="logo.png.jpg" alt="六盘水华兴物业服务有限公司" />
+            </div>
+            <ul>
+                <li><a href="index.html">首页</a></li>
+                <li><a href="about.html">公司简介</a></li>
+                <li><a href="services.html">服务项目</a></li>
+                <li><a href="community.html">小区信息</a></li>
+                <li><a href="notices.html">通知公告</a></li>
+                <li><a href="news.html">新闻动态</a></li>
+                <li><a href="online-services.html">在线服务</a></li>
+                <li><a href="interaction.html">互动交流</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 在线服务页面头部 -->
+    <header class="services-header">
+        <h1>在线服务</h1>
+        <p>便捷的物业服务，智能的生活体验</p>
+    </header>
+
+    <!-- 主要内容 -->
+    <div class="services-content">
+        <!-- 服务卡片 -->
+        <div class="service-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <div class="service-details">
+                    <h3>在线报修</h3>
+                    <p>提交维修申请，跟踪维修进度，评价维修服务</p>
+                    <button onclick="checkLoginAndRedirect('repair')" class="service-button">立即报修</button>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-file-invoice"></i>
+                </div>
+                <div class="service-details">
+                    <h3>费用查询</h3>
+                    <p>查询物业费、水电费等费用明细，支持在线缴费</p>
+                    <button onclick="checkLoginAndRedirect('payment')" class="service-button">查询缴费</button>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <div class="service-details">
+                    <h3>投诉建议</h3>
+                    <p>提交投诉和建议，跟踪处理进度</p>
+                    <button onclick="checkLoginAndRedirect('feedback')" class="service-button">我要反馈</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 服务记录 -->
+        <div class="service-history" id="serviceHistory">
+            <h2>我的服务记录</h2>
+            <div class="history-list">
+                <!-- 服务记录将通过JavaScript动态添加 -->
+            </div>
+        </div>
+
+        <!-- 在线报修表单 -->
+        <div id="repairForm" class="form-container" style="display: none;">
+            <h2>在线报修</h2>
+            <form onsubmit="submitRepair(event)">
+                <div class="form-group">
+                    <label for="repairType">报修类型</label>
+                    <select id="repairType" required>
+                        <option value="">请选择报修类型</option>
+                        <option value="water">水电维修</option>
+                        <option value="appliance">家电维修</option>
+                        <option value="facility">公共设施</option>
+                        <option value="other">其他</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="repairDescription">问题描述</label>
+                    <textarea id="repairDescription" required placeholder="请详细描述问题..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="repairImage">上传图片（可选）</label>
+                    <input type="file" id="repairImage" accept="image/*" multiple>
+                </div>
+                <div class="form-group">
+                    <label for="contactTime">期望上门时间</label>
+                    <input type="datetime-local" id="contactTime" required>
+                </div>
+                <button type="submit" class="submit-button">提交报修</button>
+            </form>
+        </div>
+
+        <!-- 费用查询界面 -->
+        <div id="paymentInfo" class="form-container" style="display: none;">
+            <h2>费用查询</h2>
+            <div class="payment-tabs">
+                <button class="tab-button active" onclick="switchTab('property')">物业费</button>
+                <button class="tab-button" onclick="switchTab('utility')">水电费</button>
+                <button class="tab-button" onclick="switchTab('parking')">停车费</button>
+            </div>
+            <div class="payment-content">
+                <div id="propertyFee" class="fee-details">
+                    <table class="fee-table">
+                        <thead>
+                            <tr>
+                                <th>费用项目</th>
+                                <th>金额</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="propertyFeeList">
+                            <!-- 费用列表将通过JavaScript动态添加 -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- 投诉建议表单 -->
+        <div id="feedbackForm" class="form-container" style="display: none;">
+            <h2>投诉建议</h2>
+            <form onsubmit="submitFeedback(event)">
+                <div class="form-group">
+                    <label for="feedbackType">反馈类型</label>
+                    <select id="feedbackType" required>
+                        <option value="">请选择反馈类型</option>
+                        <option value="complaint">投诉</option>
+                        <option value="suggestion">建议</option>
+                        <option value="praise">表扬</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="feedbackContent">内容描述</label>
+                    <textarea id="feedbackContent" required placeholder="请详细描述您的反馈内容..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="feedbackImage">上传图片（可选）</label>
+                    <input type="file" id="feedbackImage" accept="image/*" multiple>
+                </div>
+                <button type="submit" class="submit-button">提交反馈</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 登录提示弹窗 -->
+    <div class="login-modal" id="loginModal">
+        <div class="modal-content">
+            <h2>需要登录</h2>
+            <p>请先登录或注册后继续操作</p>
+            <div class="modal-buttons">
+                <button class="modal-button login-btn" onclick="redirectToLogin()">登录</button>
+                <button class="modal-button register-btn" onclick="redirectToRegister()">注册</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 聊天窗口 -->
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+            <span>在线客服</span>
+            <i class="fas fa-times" onclick="closeChat()"></i>
+        </div>
+        <div class="chat-messages" id="chatMessages"></div>
+        <div class="chat-input">
+            <input type="text" placeholder="输入消息..." id="messageInput">
+            <button onclick="sendMessage()">发送</button>
+        </div>
+    </div>
+
+    <script>
+        // 检查登录状态
+        function checkLoginAndRedirect(service) {
+            const isLoggedIn = localStorage.getItem('userLoggedIn');
+            if (isLoggedIn) {
+                switch(service) {
+                    case 'repair':
+                        showRepairForm();
+                        break;
+                    case 'payment':
+                        showPaymentInfo();
+                        break;
+                    case 'feedback':
+                        showFeedbackForm();
+                        break;
+                }
+            } else {
+                document.getElementById('loginModal').style.display = 'flex';
+            }
+        }
+
+        // 页面加载时检查登录状态并显示服务记录
+        document.addEventListener('DOMContentLoaded', function() {
+            const isLoggedIn = localStorage.getItem('userLoggedIn');
+            if (isLoggedIn) {
+                loadServiceHistory();
+            } else {
+                document.getElementById('serviceHistory').style.display = 'none';
+            }
+        });
+
+        function loadServiceHistory() {
+            // 这里应该从后端获取服务记录
+            const historyList = document.querySelector('.history-list');
+            // 示例数据
+            const records = [
+                {
+                    title: '水管维修',
+                    date: '2024-03-20',
+                    status: 'pending',
+                    statusText: '待处理'
+                },
+                {
+                    title: '空调检修',
+                    date: '2024-03-19',
+                    status: 'processing',
+                    statusText: '处理中'
+                }
+            ];
+
+            records.forEach(record => {
+                const item = document.createElement('div');
+                item.className = 'history-item';
+                item.innerHTML = `
+                    <div class="history-header">
+                        <span>${record.title}</span>
+                        <span class="status-badge status-${record.status}">${record.statusText}</span>
+                    </div>
+                    <div class="history-meta">
+                        <span><i class="far fa-calendar"></i> ${record.date}</span>
+                    </div>
+                `;
+                historyList.appendChild(item);
+            });
+        }
+
+        function redirectToLogin() {
+            window.location.href = 'login.html';
+        }
+
+        function redirectToRegister() {
+            window.location.href = 'register.html';
+        }
+
+        // 其他功能函数...
+    </script>
+</body>
+</html> 

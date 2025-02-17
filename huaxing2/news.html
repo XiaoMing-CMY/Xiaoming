@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新闻动态 - 六盘水华兴物业服务有限公司</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* 复用基础样式 */
+        body {
+            margin: 0;
+            font-family: "Microsoft YaHei", sans-serif;
+            color: #333;
+        }
+
+        /* 导航栏样式 */
+        .navbar {
+            background-color: #1e4b94;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            padding: 5px 0;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar li {
+            margin: 0 1.5rem;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        .navbar a:hover {
+            color: #ffd700;
+        }
+
+        /* 新闻页面特定样式 */
+        .news-header {
+            margin-top: 60px;
+            background: linear-gradient(rgba(30, 75, 148, 0.9), rgba(30, 75, 148, 0.9)), url('images/news-bg.jpg');
+            background-size: cover;
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .news-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .news-content {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 2rem;
+        }
+
+        .news-main {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .news-sidebar {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            height: fit-content;
+        }
+
+        .news-categories {
+            list-style: none;
+            padding: 0;
+        }
+
+        .news-categories li {
+            margin-bottom: 1rem;
+        }
+
+        .news-categories a {
+            color: #333;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .news-categories a:hover {
+            color: #1e4b94;
+        }
+
+        .news-item {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .news-item:last-child {
+            border-bottom: none;
+        }
+
+        .news-item h3 {
+            color: #1e4b94;
+            margin-bottom: 1rem;
+        }
+
+        .news-meta {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .news-meta span {
+            margin-right: 1rem;
+        }
+
+        .read-more {
+            color: #1e4b94;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .read-more:hover {
+            text-decoration: underline;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .pagination a {
+            color: #333;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            margin: 0 0.25rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .pagination a:hover,
+        .pagination a.active {
+            background: #1e4b94;
+            color: white;
+            border-color: #1e4b94;
+        }
+
+        /* 页脚样式 */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 3rem 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #ffd700;
+            margin-top: 0;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .news-content {
+                grid-template-columns: 1fr;
+            }
+
+            .navbar ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .navbar li {
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="logo.png.jpg" alt="六盘水华兴物业服务有限公司" />
+            </div>
+            <ul>
+                <li><a href="index.html">首页</a></li>
+                <li><a href="about.html">公司简介</a></li>
+                <li><a href="services.html">服务项目</a></li>
+                <li><a href="community.html">小区信息</a></li>
+                <li><a href="notices.html">通知公告</a></li>
+                <li><a href="news.html">新闻动态</a></li>
+                <li><a href="online-services.html">在线服务</a></li>
+                <li><a href="interaction.html">互动交流</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 新闻页面头部 -->
+    <header class="news-header">
+        <h1>新闻动态</h1>
+        <p>了解公司最新动态和行业资讯</p>
+    </header>
+
+    <!-- 主要内容 -->
+    <div class="news-content">
+        <!-- 新闻主要内容 -->
+        <div class="news-main">
+            <div class="news-item">
+                <h3>公司荣获"2023年度优秀物业服务企业"称号</h3>
+                <div class="news-meta">
+                    <span><i class="far fa-calendar"></i> 2024-03-15</span>
+                    <span><i class="far fa-eye"></i> 浏览量：328</span>
+                </div>
+                <p>近日，在六盘水市物业服务行业年度评选中，我公司凭借优质的服务和良好的口碑，荣获"2023年度优秀物业服务企业"称号...</p>
+                <a href="#" class="read-more">查看详情 &raquo;</a>
+            </div>
+
+            <div class="news-item">
+                <h3>成功举办2024年春节社区文化活动</h3>
+                <div class="news-meta">
+                    <span><i class="far fa-calendar"></i> 2024-02-20</span>
+                    <span><i class="far fa-eye"></i> 浏览量：256</span>
+                </div>
+                <p>春节期间，公司在各个管理小区成功举办了丰富多彩的文化活动，包括舞龙舞狮、猜灯谜、文艺演出等，受到业主一致好评...</p>
+                <a href="#" class="read-more">查看详情 &raquo;</a>
+            </div>
+
+            <div class="news-item">
+                <h3>智能化管理系统升级完成</h3>
+                <div class="news-meta">
+                    <span><i class="far fa-calendar"></i> 2024-01-10</span>
+                    <span><i class="far fa-eye"></i> 浏览量：195</span>
+                </div>
+                <p>为提升服务质量和管理效率，公司完成了智能化管理系统的升级工作，新系统将为业主提供更便捷的服务体验...</p>
+                <a href="#" class="read-more">查看详情 &raquo;</a>
+            </div>
+
+            <!-- 分页 -->
+            <div class="pagination">
+                <a href="#" class="active">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+                <a href="#">&raquo;</a>
+            </div>
+        </div>
+
+        <!-- 侧边栏 -->
+        <div class="news-sidebar">
+            <h3>新闻分类</h3>
+            <ul class="news-categories">
+                <li><a href="#">公司新闻</a></li>
+                <li><a href="#">行业动态</a></li>
+                <li><a href="#">活动报道</a></li>
+                <li><a href="#">通知公告</a></li>
+            </ul>
+
+            <h3>热门新闻</h3>
+            <ul class="news-categories">
+                <li><a href="#">物业服务标准化建设推进会议召开</a></li>
+                <li><a href="#">2024年度业主满意度调查报告发布</a></li>
+                <li><a href="#">新一轮员工技能培训圆满结束</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>联系我们</h3>
+                <p>地址：贵州省六盘水市钟山区大街城西路2号搬迁街</p>
+                <p>电话：13158289988</p>
+                <p>邮箱：1318940380@qq.com</p>
+            </div>
+            <div class="footer-section">
+                <h3>服务时间</h3>
+                <p>周一至周日</p>
+                <p>24小时服务</p>
+            </div>
+            <div class="footer-section">
+                <h3>关注我们</h3>
+                <p>微信公众号：六盘水华兴物业服务有限公司</p>
+                <p>服务热线：17708587286</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>版权所有 © 2025 六盘水华兴物业服务有限公司</p>
+        </div>
+    </footer>
+</body>
+</html>

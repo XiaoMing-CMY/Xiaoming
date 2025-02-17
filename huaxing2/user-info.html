@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>完善个人信息 - 六盘水华兴物业服务有限公司</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: "Microsoft YaHei", sans-serif;
+            color: #333;
+            background: linear-gradient(135deg, #1e4b94, #3a6fc9);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .info-container {
+            width: 100%;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            padding: 2.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .info-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .info-header h2 {
+            color: #1e4b94;
+            font-size: 1.8rem;
+            margin: 0;
+        }
+
+        .info-header p {
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        .form-section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .form-section h3 {
+            color: #1e4b94;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #1e4b94;
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #1e4b94;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #1e4b94;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(30, 75, 148, 0.1);
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 1rem;
+            background: #1e4b94;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-top: 1.5rem;
+        }
+
+        .submit-button:hover {
+            background: #163a75;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(30, 75, 148, 0.2);
+        }
+
+        .required::after {
+            content: '*';
+            color: #dc3545;
+            margin-left: 4px;
+        }
+
+        .error-message {
+            color: #dc3545;
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="info-container">
+        <div class="info-header">
+            <h2>完善个人信息</h2>
+            <p>请填写您的基本信息，带 * 号的为必填项</p>
+        </div>
+
+        <form id="userInfoForm" onsubmit="return handleSubmit(event)">
+            <!-- 基本信息 -->
+            <div class="form-section">
+                <h3>基本信息</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="required" for="name">姓名</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="required" for="gender">性别</label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="male" name="gender" value="male" required>
+                                <label for="male">男</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="female" name="gender" value="female">
+                                <label for="female">女</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="required" for="phone">联系电话</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="required" for="emergency-phone">紧急联系电话</label>
+                        <input type="tel" id="emergency-phone" name="emergency-phone" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 房屋信息 -->
+            <div class="form-section">
+                <h3>房屋信息</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="required" for="building">所在楼栋</label>
+                        <input type="text" id="building" name="building" placeholder="例：A栋" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="required" for="room">房号</label>
+                        <input type="text" id="room" name="room" placeholder="例：1单元101" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="required" for="area">房屋面积（平方米）</label>
+                        <input type="number" id="area" name="area" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="required" for="layout">户型</label>
+                        <input type="text" id="layout" name="layout" placeholder="例：三室两厅" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="required" for="property">房屋产权</label>
+                    <select id="property" name="property" required>
+                        <option value="">请选择</option>
+                        <option value="owner">业主</option>
+                        <option value="rent">租户</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 车辆信息 -->
+            <div class="form-section">
+                <h3>车辆信息（选填）</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="car-plate">车牌号码</label>
+                        <input type="text" id="car-plate" name="car-plate">
+                    </div>
+                    <div class="form-group">
+                        <label for="car-model">车辆型号</label>
+                        <input type="text" id="car-model" name="car-model">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="parking">是否租用停车位</label>
+                        <select id="parking" name="parking">
+                            <option value="no">否</option>
+                            <option value="yes">是</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="parking-number">车位编号</label>
+                        <input type="text" id="parking-number" name="parking-number">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 特殊需求 -->
+            <div class="form-section">
+                <h3>特殊需求（选填）</h3>
+                <div class="form-group">
+                    <label for="special-needs">如有特殊需求，请在此说明</label>
+                    <textarea id="special-needs" name="special-needs" rows="4"></textarea>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-button">提交信息</button>
+        </form>
+    </div>
+
+    <script>
+        // 表单验证和提交处理
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            // 获取所有必填字段
+            const requiredFields = document.querySelectorAll('[required]');
+            let isValid = true;
+
+            // 验证必填字段
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    isValid = false;
+                    showError(field, '此项为必填项');
+                } else {
+                    hideError(field);
+                }
+            });
+
+            // 验证手机号格式
+            const phone = document.getElementById('phone');
+            const emergencyPhone = document.getElementById('emergency-phone');
+            
+            if (!/^1[3-9]\d{9}$/.test(phone.value)) {
+                isValid = false;
+                showError(phone, '请输入有效的手机号码');
+            }
+
+            if (!/^1[3-9]\d{9}$/.test(emergencyPhone.value)) {
+                isValid = false;
+                showError(emergencyPhone, '请输入有效的手机号码');
+            }
+
+            if (isValid) {
+                // 这里应该发送到后端进行处理
+                // 示例代码仅作演示
+                localStorage.setItem('userInfoCompleted', 'true');
+                alert('信息提交成功！');
+                window.location.href = 'index.html'; // 跳转到首页或其他页面
+            }
+        }
+
+        function showError(field, message) {
+            // 获取或创建错误消息元素
+            let errorDiv = field.parentElement.querySelector('.error-message');
+            if (!errorDiv) {
+                errorDiv = document.createElement('div');
+                errorDiv.className = 'error-message';
+                field.parentElement.appendChild(errorDiv);
+            }
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            field.style.borderColor = '#dc3545';
+        }
+
+        function hideError(field) {
+            const errorDiv = field.parentElement.querySelector('.error-message');
+            if (errorDiv) {
+                errorDiv.style.display = 'none';
+            }
+            field.style.borderColor = '#e0e0e0';
+        }
+
+        // 检查用户是否已登录
+        document.addEventListener('DOMContentLoaded', function() {
+            const isLoggedIn = localStorage.getItem('userLoggedIn');
+            if (!isLoggedIn) {
+                window.location.href = 'login.html';
+            }
+        });
+    </script>
+</body>
+</html> 

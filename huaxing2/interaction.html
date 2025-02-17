@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>互动交流 - 六盘水华兴物业服务有限公司</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* 复用基础样式 */
+        body {
+            margin: 0;
+            font-family: "Microsoft YaHei", sans-serif;
+            color: #333;
+        }
+
+        /* 导航栏样式 */
+        .navbar {
+            background-color: #1e4b94;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            padding: 5px 0;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar li {
+            margin: 0 1.5rem;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        .navbar a:hover {
+            color: #ffd700;
+        }
+
+        /* 互动交流页面特定样式 */
+        .interaction-header {
+            margin-top: 60px;
+            background: linear-gradient(rgba(30, 75, 148, 0.9), rgba(30, 75, 148, 0.9)), url('images/interaction-bg.jpg');
+            background-size: cover;
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .interaction-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .interaction-content {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 2rem;
+        }
+
+        .forum-section {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 2rem;
+        }
+
+        .forum-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .new-topic-btn {
+            background: #1e4b94;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .new-topic-btn:hover {
+            background: #163a75;
+        }
+
+        .topic-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .topic-item {
+            border-bottom: 1px solid #eee;
+            padding: 1.5rem 0;
+        }
+
+        .topic-item:last-child {
+            border-bottom: none;
+        }
+
+        .topic-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .topic-title {
+            color: #1e4b94;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .topic-meta {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .topic-meta span {
+            margin-right: 1rem;
+        }
+
+        .sidebar {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 2rem;
+        }
+
+        .sidebar h3 {
+            color: #1e4b94;
+            margin-top: 0;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #1e4b94;
+        }
+
+        .hot-topics {
+            list-style: none;
+            padding: 0;
+        }
+
+        .hot-topics li {
+            margin-bottom: 1rem;
+        }
+
+        .hot-topics a {
+            color: #333;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .hot-topics a:hover {
+            color: #1e4b94;
+        }
+
+        .online-chat {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .chat-button {
+            display: inline-block;
+            background: #1e4b94;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-top: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .chat-button:hover {
+            background: #163a75;
+        }
+
+        /* 页脚样式 */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 3rem 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #ffd700;
+            margin-top: 0;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .interaction-content {
+                grid-template-columns: 1fr;
+            }
+
+            .navbar ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .navbar li {
+                margin: 0.5rem 0;
+            }
+
+            .interaction-header {
+                padding: 3rem 1rem;
+            }
+
+            .interaction-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="logo.png.jpg" alt="六盘水华兴物业服务有限公司" />
+            </div>
+            <ul>
+                <li><a href="index.html">首页</a></li>
+                <li><a href="about.html">公司简介</a></li>
+                <li><a href="services.html">服务项目</a></li>
+                <li><a href="community.html">小区信息</a></li>
+                <li><a href="notices.html">通知公告</a></li>
+                <li><a href="news.html">新闻动态</a></li>
+                <li><a href="online-services.html">在线服务</a></li>
+                <li><a href="interaction.html">互动交流</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 互动交流页面头部 -->
+    <header class="interaction-header">
+        <h1>互动交流</h1>
+        <p>与邻里交流互动，共建和谐社区</p>
+    </header>
+
+    <!-- 主要内容 -->
+    <div class="interaction-content">
+        <!-- 论坛区域 -->
+        <div class="forum-section">
+            <div class="forum-header">
+                <h2>业主论坛</h2>
+                <a href="#" class="new-topic-btn">发布新话题</a>
+            </div>
+            <ul class="topic-list">
+                <li class="topic-item">
+                    <div class="topic-header">
+                        <a href="#" class="topic-title">关于小区绿化改造的建议</a>
+                        <div class="topic-meta">
+                            <span><i class="far fa-user"></i> 张业主</span>
+                            <span><i class="far fa-clock"></i> 2024-03-20</span>
+                            <span><i class="far fa-comment"></i> 15条回复</span>
+                        </div>
+                    </div>
+                    <p>建议在小区增加一些观赏性植物，提升小区整体环境...</p>
+                </li>
+                <li class="topic-item">
+                    <div class="topic-header">
+                        <a href="#" class="topic-title">电动车充电桩使用问题</a>
+                        <div class="topic-meta">
+                            <span><i class="far fa-user"></i> 李业主</span>
+                            <span><i class="far fa-clock"></i> 2024-03-19</span>
+                            <span><i class="far fa-comment"></i> 8条回复</span>
+                        </div>
+                    </div>
+                    <p>希望能增加一些充电桩，现有的经常要排队...</p>
+                </li>
+                <li class="topic-item">
+                    <div class="topic-header">
+                        <a href="#" class="topic-title">社区文化活动建议</a>
+                        <div class="topic-meta">
+                            <span><i class="far fa-user"></i> 王业主</span>
+                            <span><i class="far fa-clock"></i> 2024-03-18</span>
+                            <span><i class="far fa-comment"></i> 12条回复</span>
+                        </div>
+                    </div>
+                    <p>建议多组织一些文化活动，增进邻里感情...</p>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 侧边栏 -->
+        <div class="sidebar">
+            <h3>热门话题</h3>
+            <ul class="hot-topics">
+                <li><a href="#">小区安防系统升级讨论</a></li>
+                <li><a href="#">业主文化节活动投票</a></li>
+                <li><a href="#">停车位分配方案征求意见</a></li>
+            </ul>
+
+            <div class="online-chat">
+                <h3>在线客服</h3>
+                <p>工作时间：8:00-22:00</p>
+                <a href="#" class="chat-button">
+                    <i class="fas fa-comments"></i> 开始对话
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>联系我们</h3>
+                <p>地址：贵州省六盘水市钟山区大街城西路2号搬迁街</p>
+                <p>电话：13158289988</p>
+                <p>邮箱：1318940380@qq.com</p>
+            </div>
+            <div class="footer-section">
+                <h3>服务时间</h3>
+                <p>周一至周日</p>
+                <p>24小时服务</p>
+            </div>
+            <div class="footer-section">
+                <h3>关注我们</h3>
+                <p>微信公众号：六盘水华兴物业服务有限公司</p>
+                <p>服务热线：17708587286</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>版权所有 © 2025 六盘水华兴物业服务有限公司</p>
+        </div>
+    </footer>
+</body>
+</html> 

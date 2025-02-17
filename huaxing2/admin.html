@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理后台 - 六盘水华兴物业服务有限公司</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* 管理后台样式 */
+        .admin-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: #1e4b94;
+            color: white;
+            padding: 2rem 0;
+        }
+
+        .sidebar-header {
+            padding: 0 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-header img {
+            height: 40px;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar-menu li {
+            padding: 0.8rem 1.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar-menu li:hover,
+        .sidebar-menu li.active {
+            background: #163a75;
+        }
+
+        .sidebar-menu i {
+            margin-right: 0.5rem;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            background: #f5f5f5;
+        }
+
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .content-body {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table th,
+        .table td {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            text-align: left;
+        }
+
+        .table th {
+            background: #f8f9fa;
+            font-weight: bold;
+        }
+
+        .action-buttons button {
+            padding: 0.5rem 1rem;
+            margin-right: 0.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .edit-button {
+            background: #1e4b94;
+            color: white;
+        }
+
+        .delete-button {
+            background: #dc3545;
+            color: white;
+        }
+        /* 返回顶部按钮样式 */
+.back-to-top {
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    background: #1e4b94;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 999;
+    transition: all 0.3s ease;
+}
+
+.back-to-top:hover {
+    background: #153670;
+    transform: translateY(-3px);
+}
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- 侧边栏 -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <img src="logo.png.jpg" alt="六盘水华兴物业服务有限公司">
+            </div>
+            <ul class="sidebar-menu">
+                <li class="active" onclick="showContent('notices')">
+                    <i class="fas fa-bullhorn"></i> 通知公告管理
+                </li>
+                <li onclick="showContent('news')">
+                    <i class="fas fa-newspaper"></i> 新闻动态管理
+                </li>
+                <li onclick="showContent('interactions')">
+                    <i class="fas fa-comments"></i> 互动交流管理
+                </li>
+                <li onclick="showContent('users')">
+                    <i class="fas fa-users"></i> 用户管理
+                </li>
+                <li onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> 退出登录
+                </li>
+            </ul>
+        </div>
+
+        <!-- 主要内容区域 -->
+        <div class="main-content">
+            <div class="content-header">
+                <h2>通知公告管理</h2>
+                <button class="edit-button" onclick="addNew()">
+                    <i class="fas fa-plus"></i> 新增
+                </button>
+            </div>
+            <div class="content-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>标题</th>
+                            <th>发布时间</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>关于开展2024年第一季度消防安全检查的通知</td>
+                            <td>2024-03-20</td>
+                            <td>已发布</td>
+                            <td class="action-buttons">
+                                <button class="edit-button">编辑</button>
+                                <button class="delete-button">删除</button>
+                            </td>
+                        </tr>
+                        <!-- 更多数据行 -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showContent(type) {
+            // 切换内容显示
+            const menuItems = document.querySelectorAll('.sidebar-menu li');
+            menuItems.forEach(item => item.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            
+            // 这里应该根据type加载不同的内容
+        }
+
+        function addNew() {
+            // 添加新内容的逻辑
+        }
+
+        function logout() {
+            // 退出登录
+            localStorage.removeItem('adminLoggedIn');
+            window.location.href = 'login.html';
+        }
+        // 返回顶部功能
+window.onscroll = function() {
+    const backToTop = document.querySelector('.back-to-top');
+    if (window.scrollY > 300) {
+        backToTop.style.display = 'flex';
+    } else {
+        backToTop.style.display = 'none';
+    }
+};
+
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+    </script>
+    <!-- 返回顶部按钮 -->
+        <div class="back-to-top" onclick="scrollToTop()">
+            <i class="fas fa-arrow-up"></i>
+        </div>
+</body>
+</html> 

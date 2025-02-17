@@ -1,0 +1,938 @@
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>六盘水华兴物业服务有限公司</title>
+    <!-- 引入Font Awesome图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* 基础样式 */
+        body {
+            margin: 0;
+            font-family: "Microsoft YaHei", sans-serif;
+            color: #333;
+        }
+
+        /* 导航栏样式 */
+        .navbar {
+            background-color: #1e4b94;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            padding: 5px 0;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+            flex-wrap: nowrap;
+        }
+
+        .navbar li {
+            margin: 0 1rem;
+            white-space: nowrap;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+            padding: 0.5rem 0.8rem;
+        }
+
+        .navbar a:hover {
+            color: #ffd700;
+        }
+
+        /* 主要内容区域 */
+        .hero {
+            background-color: #2c5282;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5));
+            padding-top: 60px;
+        }
+        /* 轮播图样式 */
+.carousel {
+    position: relative;
+    margin-top: 60px;
+    height: 500px;
+    overflow: hidden;
+}
+
+.carousel-container {
+    height: 100%;
+    position: relative;
+}
+
+.carousel-slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.carousel-slide.active {
+    opacity: 1;
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    padding: 15px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.carousel-button.prev {
+    left: 10px;
+}
+
+.carousel-button.next {
+    right: 10px;
+}
+
+.carousel-dots {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background: rgba(255,255,255,0.5);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.dot.active {
+    background: white;
+}
+
+/* 特色服务样式 */
+.features {
+    padding: 4rem 2rem;
+    background: #f8f9fa;
+}
+
+.features h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #1e4b94;
+}
+
+.features-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.feature-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.feature-card i {
+    font-size: 2.5rem;
+    color: #1e4b94;
+    margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+    color: #1e4b94;
+    margin-top: 1rem;
+}
+
+/* 新闻动态区域 */
+.news {
+    padding: 4rem 2rem;
+}
+
+.news-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.news h2 {
+    text-align: center;
+    color: #1e4b94;
+    margin-bottom: 2rem;
+}
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.news-card {
+    background: #f8f9fa;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.news-content {
+    padding: 1.5rem;
+}
+
+.news-content h3 {
+    margin-top: 0;
+    color: #1e4b94;
+}
+
+.news-content a {
+    color: #1e4b94;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* 页脚样式 */
+.footer {
+    background-color: #333;
+    color: white;
+    padding: 3rem 2rem;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.footer-section h3 {
+    color: #ffd700;
+    margin-top: 0;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    animation: fadeIn 2s;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin: 0;
+    animation: fadeIn 2s 0.5s backwards;
+}
+
+        /* 保持原有的所有其他样式... */
+
+        /* AI客服样式 */
+        .ai-assistant-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #1e4b94;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.3s;
+        }
+
+        .ai-assistant-button:hover {
+            transform: translateY(-3px);
+        }
+
+        .chat-window {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            display: none;
+            flex-direction: column;
+            z-index: 9999;
+        }
+
+        .chat-window.active {
+            display: flex;
+        }
+
+        .chat-header {
+            padding: 15px;
+            background: #1e4b94;
+            color: white;
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close-button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+        }
+
+        .message {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .message.user {
+            flex-direction: row-reverse;
+        }
+
+        .message-content {
+            background: #f0f2f5;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+
+        .message.user .message-content {
+            background: #1e4b94;
+            color: white;
+        }
+
+        .chat-input {
+            padding: 15px;
+            border-top: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .message-input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+        }
+
+        .send-button {
+            background: #1e4b94;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+/* 新闻动态区域样式更新 */
+.news-card {
+    background: #f8f9fa;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: all 0.3s ease; /* 添加过渡效果 */
+    cursor: pointer; /* 添加手型光标 */
+}
+
+.news-card:hover {
+    transform: translateY(-5px); /* 悬浮上移效果 */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2); /* 增强阴影 */
+}
+
+.news-content {
+    padding: 1.5rem;
+}
+
+.news-content h3 {
+    margin-top: 0;
+    color: #1e4b94;
+    transition: color 0.3s ease; /* 添加文字颜色过渡效果 */
+}
+
+.news-content p {
+    color: #666;
+    margin: 1rem 0;
+    line-height: 1.6;
+}
+
+.news-content a {
+    color: #1e4b94;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 1rem;
+    transition: all 0.3s ease; /* 添加链接过渡效果 */
+}
+
+.news-content a:hover {
+    color: #0056b3; /* 链接悬浮颜色 */
+    transform: translateX(5px); /* 链接悬浮右移效果 */
+}
+
+/* 添加新闻卡片点击效果 */
+.news-card:active {
+    transform: translateY(-2px); /* 点击时的位移效果 */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15); /* 点击时的阴影效果 */
+}
+        /* 加载动画 */
+        .loading-spinner {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.9);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .loading-spinner::after {
+            content: "";
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #1e4b94;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* 返回顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            background: #1e4b94;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 999;
+            transition: all 0.3s ease;
+        }
+        
+        .back-to-top:hover {
+            background: #153670;
+            transform: translateY(-3px);
+        }
+        
+        /* 移动端菜单 */
+        .mobile-menu-button {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 768px) {
+            .navbar ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #1e4b94;
+                flex-direction: column;
+                padding: 0;
+            }
+            
+            .navbar ul.active {
+                display: flex;
+            }
+            
+            .navbar li {
+                margin: 0;
+                padding: 15px;
+                border-top: 1px solid rgba(255,255,255,0.1);
+            }
+            
+            .mobile-menu-button {
+                display: block;
+            }
+        }     
+/* 保持原有的响应式设计样式... */
+    </style>
+    
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>六盘水华兴物业服务有限公司</title>
+        
+        <!-- SEO优化 -->
+        <meta name="description" content="六盘水华兴物业服务有限公司提供专业的物业管理服务，包括住宅物业、商业物业、专项服务等">
+        <meta name="keywords" content="六盘水物业,华兴物业,物业管理,物业服务,贵州物业">
+        <meta property="og:title" content="六盘水华兴物业服务有限公司">
+        <meta property="og:description" content="专业的物业服务，温馨的家园管理">
+        <meta property="og:image" content="logo.png">
+        
+        <!-- 资源预加载 -->
+        <link rel="preload" href="logo.png" as="image">
+        <link rel="preload" href="images/slide1.jpg" as="image">
+        <link rel="preload" href="images/slide2.jpg" as="image">
+        <link rel="preload" href="images/slide3.jpg" as="image">
+        
+        <!-- 原有的样式引入 -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+    <!-- 导航栏 -->
+    <body>
+        <!-- 加载动画 -->
+        <div class="loading-spinner"></div>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <img src="logo.png.jpg" alt="六盘水华兴物业服务有限公司" />
+                </div>
+                <button class="mobile-menu-button">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul>
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="about.html">公司简介</a></li>
+                    <li><a href="services.html">服务项目</a></li>
+                    <li><a href="community.html">小区信息</a></li>
+                    <li><a href="notices.html">通知公告</a></li>
+                    <li><a href="news.html">新闻动态</a></li>
+                    <li><a href="online-services.html">在线服务</a></li>
+                    <li><a href="interaction.html">互动交流</a></li>
+                </ul>
+            </div>
+        </nav>
+
+    <!-- 轮播图部分 -->
+    <div class="carousel">
+        <div class="carousel-slide">
+            <img data-src="images/slide1.jpg" alt="小区美景" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+        </div>
+        <div class="carousel-slide">
+            <img data-src="images/slide2.jpg" alt="服务亮点" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+        </div>
+        <div class="carousel-slide">
+            <img data-src="images/slide3.jpg" alt="活动照片" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+        </div>
+            <button class="carousel-button prev">&#10094;</button>
+            <button class="carousel-button next">&#10095;</button>
+        </div>
+        <div class="carousel-dots"></div>
+    </div>
+
+    <!-- 主要内容 -->
+    <div class="hero">
+        <div class="hero-content">
+            <h1>六盘水华兴物业服务有限公司</h1>
+            <p>专业的物业服务，温馨的家园管理</p>
+        </div>
+    </div>
+
+    <!-- 服务特色部分 -->
+    <section class="features">
+        <h2>我们的服务</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="fas fa-home"></i>
+                <h3>住宅物业服务</h3>
+                <p>提供全方位的住宅物业管理解决方案</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-building"></i>
+                <h3>商业物业服务</h3>
+                <p>专业的商业物业管理与运营支持</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-tools"></i>
+                <h3>专项服务</h3>
+                <p>维修、保洁、绿化、安保等专业服务</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-plus-circle"></i>
+                <h3>增值服务</h3>
+                <p>房屋托管、快递代收等便民服务</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 新闻动态 -->
+    <section class="news">
+       <div class="news-grid">
+    <div class="news-card" onclick="window.location.href='news.html'">
+        <div class="news-content">
+            <h3>公司荣获"优秀物业服务企业"称号</h3>
+            <p>2024年3月，我公司在年度评选中荣获"优秀物业服务企业"称号...</p>
+            <a href="news.html">查看详情 →</a>
+        </div>
+    </div>
+    <div class="news-card" onclick="window.location.href='news.html'">
+        <div class="news-content">
+            <h3>开展消防安全培训活动</h3>
+            <p>为提高员工消防安全意识，我公司组织开展了消防安全培训...</p>
+            <a href="news.html">查看详情 →</a>
+        </div>
+    </div>
+    <div class="news-card" onclick="window.location.href='news.html'">
+        <div class="news-content">
+            <h3>智能化管理系统升级完成</h3>
+            <p>为提升服务质量，公司完成了智能化管理系统的升级...</p>
+            <a href="news.html">查看详情 →</a>
+        </div>
+    </div>
+</div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>联系我们</h3>
+                <p>地址：贵州省六盘水市钟山区大街城西路2号搬迁街</p>
+                <p>电话：13158289988</p>
+                <p>邮箱：1318940380@qq.com</p>
+            </div>
+            <div class="footer-section">
+                <h3>服务时间</h3>
+                <p>周一至周日</p>
+                <p>24小时服务</p>
+            </div>
+            <div class="footer-section">
+                <h3>关注我们</h3>
+                <p>微信公众号：六盘水华兴物业服务有限公司</p>
+                <p>服务热线：17708587286</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>版权所有 © 2025 六盘水华兴物业服务有限公司</p>
+        </div>
+    </footer>
+
+    <!-- AI客服组件 -->
+    <div class="ai-assistant-button" onclick="toggleChat()">
+        <i class="fas fa-robot"></i>
+        <span>智能客服</span>
+    </div>
+
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+            <h3>智能客服助手</h3>
+            <button class="close-button" onclick="toggleChat()">×</button>
+        </div>
+        <div class="chat-messages"></div>
+        <div class="chat-input">
+            <div class="input-tools">
+                <button class="tool-button" title="语音输入" onclick="startVoiceRecognition()">
+                    <i class="fas fa-microphone"></i>
+                </button>
+            </div>
+            <input type="text" class="message-input" placeholder="请输入您的问题...">
+            <button class="send-button" onclick="sendMessage()">发送</button>
+        </div>
+    </div>
+        <!-- 脚本部分 -->
+    <script>
+        // 轮播图功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.carousel-slide');
+            const prevButton = document.querySelector('.carousel-button.prev');
+            const nextButton = document.querySelector('.carousel-button.next');
+            let currentSlide = 0;
+
+            // 初始化轮播图
+            function initCarousel() {
+                slides[currentSlide].classList.add('active');
+                createDots();
+                startAutoSlide();
+            }
+
+            // 创建轮播图指示点
+            function createDots() {
+                const dotsContainer = document.querySelector('.carousel-dots');
+                slides.forEach((_, index) => {
+                    const dot = document.createElement('span');
+                    dot.classList.add('dot');
+                    if (index === currentSlide) dot.classList.add('active');
+                    dot.addEventListener('click', () => goToSlide(index));
+                    dotsContainer.appendChild(dot);
+                });
+            }
+
+            // 切换到指定幻灯片
+            function goToSlide(n) {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (n + slides.length) % slides.length;
+                slides[currentSlide].classList.add('active');
+                updateDots();
+            }
+
+            // 更新指示点状态
+            function updateDots() {
+                const dots = document.querySelectorAll('.dot');
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentSlide);
+                });
+            }
+
+            // 自动播放
+            function startAutoSlide() {
+                setInterval(() => {
+                    goToSlide(currentSlide + 1);
+                }, 5000);
+            }
+
+            // 事件监听
+            prevButton.addEventListener('click', () => goToSlide(currentSlide - 1));
+            nextButton.addEventListener('click', () => goToSlide(currentSlide + 1));
+
+            // 初始化轮播图
+            initCarousel();
+        });
+
+        // AI客服功能
+        const knowledgeBase = {
+            // 公司职务信息
+            "总经理": "我们公司的总经理是陈光华，负责公司整体运营管理。",
+            "副总经理": "我们公司的副总经理是刘德群，协助总经理开展工作。",
+            "人事主管": "我们公司的人事主管是陈锬，负责人力资源管理工作。",
+            "财务主管": "我们公司的财务主管是陈明毅，负责公司财务工作。",
+            "客服主管": "我们公司的客服主管是王璇，负责客户服务工作。",
+            
+            // 物业服务相关
+            "物业费": "我们小区的物业费标准是：住宅3元/平方米/月，商铺5元/平方米/月。",
+            "维修": "如需报修，请拨打24小时维修热线：17708587286",
+            "停车": "小区内设有地下停车场和地面停车位，月租金：地下280元/月，地面200元/月。",
+            
+            // 投诉建议
+            "投诉": "您可以拨打投诉热线：13158289988，或到物业服务中心现场反映问题。",
+            "建议": "感谢您的建议，您可以通过以下方式反馈：1. 物业服务中心 2. 投诉热线 3. 微信公众号",
+            
+            // 其他服务
+            "装修": "装修时间：周一至周五 9:00-18:00，需要提前到物业服务中心登记备案。",
+            "快递": "小区设有智能快递柜，位于各单元门口，也可以到物业服务中心代收。"
+        };
+
+        // 切换聊天窗口
+        function toggleChat() {
+            const chatWindow = document.getElementById('chatWindow');
+            chatWindow.classList.toggle('active');
+            if (chatWindow.classList.contains('active')) {
+                addMessage("您好！我是华兴物业的智能客服助手，很高兴为您服务。请问有什么可以帮您？", false);
+            }
+        }
+
+        // 添加消息
+        function addMessage(text, isUser) {
+            const messagesContainer = document.querySelector('.chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user' : ''}`;
+            messageDiv.innerHTML = `<div class="message-content">${text}</div>`;
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        // 查找答案
+        function findAnswer(question) {
+            for (let key in knowledgeBase) {
+                if (question.includes(key)) {
+                    return knowledgeBase[key];
+                }
+            }
+            return "抱歉，我可能没有理解您的问题。您可以换个方式描述，或直接联系物业服务中心：13158289988";
+        }
+
+        // 发送消息
+        function sendMessage() {
+            const input = document.querySelector('.message-input');
+            const message = input.value.trim();
+            
+            if (message) {
+                addMessage(message, true);
+                input.value = '';
+                
+                setTimeout(() => {
+                    const answer = findAnswer(message);
+                    addMessage(answer, false);
+                }, 500);
+            }
+        }
+
+        // 绑定回车发送
+        document.querySelector('.message-input').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // 语音识别功能
+        function startVoiceRecognition() {
+            if ('webkitSpeechRecognition' in window) {
+                const recognition = new webkitSpeechRecognition();
+                recognition.lang = 'zh-CN';
+                recognition.continuous = false;
+                recognition.interimResults = false;
+
+                recognition.onstart = () => {
+                    addMessage("正在听您说...", false);
+                };
+
+                recognition.onresult = (event) => {
+                    const text = event.results[0][0].transcript;
+                    document.querySelector('.message-input').value = text;
+                    sendMessage();
+                };
+
+                recognition.onerror = (event) => {
+                    addMessage("抱歉，语音识别出现错误，请重试。", false);
+                };
+
+                recognition.start();
+            } else {
+                addMessage("您的浏览器不支持语音识别功能。", false);
+            }
+            }
+                    // 页面加载动画
+        window.addEventListener('load', function() {
+            document.querySelector('.loading-spinner').style.display = 'none';
+        });
+        
+        // 返回顶部功能
+        window.onscroll = function() {
+            const backToTop = document.querySelector('.back-to-top');
+            if (window.scrollY > 300) {
+                backToTop.style.display = 'flex';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        };
+        
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        // 移动端菜单
+        const mobileMenuButton = document.querySelector('.mobile-menu-button');
+        const navbarMenu = document.querySelector('.navbar ul');
+        
+        mobileMenuButton.addEventListener('click', function() {
+            navbarMenu.classList.toggle('active');
+        });
+        
+        // 图片懒加载
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('img[data-src]');
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.removeAttribute('data-src');
+                        observer.unobserve(img);
+                    }
+                });
+            });
+            
+            images.forEach(img => imageObserver.observe(img));
+        });
+        
+        // 添加页面加载进度条
+        const progressBar = document.createElement('div');
+        progressBar.style.position = 'fixed';
+        progressBar.style.top = '0';
+        progressBar.style.left = '0';
+        progressBar.style.height = '3px';
+        progressBar.style.width = '0';
+        progressBar.style.backgroundColor = '#1e4b94';
+        progressBar.style.transition = 'width 0.2s';
+        progressBar.style.zIndex = '10000';
+        document.body.appendChild(progressBar);
+        
+        window.addEventListener('load', () => {
+            progressBar.style.width = '100%';
+            setTimeout(() => {
+                progressBar.style.opacity = '0';
+            }, 500);
+        });
+        
+    </script>
+        <!-- 返回顶部按钮 -->
+        <div class="back-to-top" onclick="scrollToTop()">
+            <i class="fas fa-arrow-up"></i>
+        </div>
+</body>
+</html>

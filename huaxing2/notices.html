@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>通知公告 - 六盘水华兴物业服务有限公司</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* 复用基础样式 */
+        body {
+            margin: 0;
+            font-family: "Microsoft YaHei", sans-serif;
+            color: #333;
+        }
+
+        /* 导航栏样式 */
+        .navbar {
+            background-color: #1e4b94;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            padding: 5px 0;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar li {
+            margin: 0 1.5rem;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        .navbar a:hover {
+            color: #ffd700;
+        }
+
+        /* 通知公告页面特定样式 */
+        .notices-header {
+            margin-top: 60px;
+            background: linear-gradient(rgba(30, 75, 148, 0.9), rgba(30, 75, 148, 0.9)), url('images/notices-bg.jpg');
+            background-size: cover;
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .notices-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .notices-content {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .notice-filters {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-button {
+            padding: 0.5rem 1.5rem;
+            border: 2px solid #1e4b94;
+            border-radius: 4px;
+            background: none;
+            color: #1e4b94;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-button.active,
+        .filter-button:hover {
+            background: #1e4b94;
+            color: white;
+        }
+
+        .notice-list {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 1rem;
+        }
+
+        .notice-item {
+            padding: 1.5rem;
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.3s;
+        }
+
+        .notice-item:last-child {
+            border-bottom: none;
+        }
+
+        .notice-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        .notice-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .notice-title h3 {
+            color: #1e4b94;
+            margin: 0;
+        }
+
+        .notice-meta {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .notice-meta span {
+            margin-right: 1rem;
+        }
+
+        .notice-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-left: 1rem;
+        }
+
+        .tag-urgent {
+            background: #ff4444;
+            color: white;
+        }
+
+        .tag-normal {
+            background: #1e4b94;
+            color: white;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .pagination a {
+            color: #333;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            margin: 0 0.25rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .pagination a:hover,
+        .pagination a.active {
+            background: #1e4b94;
+            color: white;
+            border-color: #1e4b94;
+        }
+
+        /* 页脚样式 */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 3rem 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #ffd700;
+            margin-top: 0;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .navbar ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .navbar li {
+                margin: 0.5rem 0;
+            }
+
+            .notices-header {
+                padding: 3rem 1rem;
+            }
+
+            .notices-header h1 {
+                font-size: 2rem;
+            }
+
+            .filter-buttons {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="logo.png.jpg" alt="六盘水华兴物业服务有限公司" />
+            </div>
+            <ul>
+                <li><a href="index.html">首页</a></li>
+                <li><a href="about.html">公司简介</a></li>
+                <li><a href="services.html">服务项目</a></li>
+                <li><a href="community.html">小区信息</a></li>
+                <li><a href="notices.html">通知公告</a></li>
+                <li><a href="news.html">新闻动态</a></li>
+                <li><a href="online-services.html">在线服务</a></li>
+                <li><a href="interaction.html">互动交流</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 通知公告页面头部 -->
+    <header class="notices-header">
+        <h1>通知公告</h1>
+        <p>及时了解小区重要通知信息</p>
+    </header>
+
+    <!-- 主要内容 -->
+    <div class="notices-content">
+        <!-- 通知分类筛选 -->
+        <div class="notice-filters">
+            <div class="filter-buttons">
+                <button class="filter-button active">全部通知</button>
+                <button class="filter-button">物业通知</button>
+                <button class="filter-button">维修公告</button>
+                <button class="filter-button">活动通知</button>
+                <button class="filter-button">紧急通知</button>
+            </div>
+        </div>
+
+        <!-- 通知列表 -->
+        <div class="notice-list">
+            <div class="notice-item">
+                <div class="notice-title">
+                    <h3>关于开展2024年第一季度消防安全检查的通知</h3>
+                    <span class="notice-tag tag-normal">物业通知</span>
+                </div>
+                <div class="notice-meta">
+                    <span><i class="far fa-calendar"></i> 2024-03-20</span>
+                    <span><i class="far fa-clock"></i> 有效期至：2024-03-25</span>
+                </div>
+                <p>为确保小区消防安全，我司将于3月25日-3月30日开展消防安全检查工作，请各位业主配合...</p>
+            </div>
+
+            <div class="notice-item">
+                <div class="notice-title">
+                    <h3>关于临时停水通知</h3>
+                    <span class="notice-tag tag-urgent">紧急通知</span>
+                </div>
+                <div class="notice-meta">
+                    <span><i class="far fa-calendar"></i> 2024-03-19</span>
+                    <span><i class="far fa-clock"></i> 有效期至：2024-03-20</span>
+                </div>
+                <p>因市政管网维修，小区将于3月20日上午9:00-下午3:00临时停水，请各位业主提前储水...</p>
+            </div>
+
+            <div class="notice-item">
+                <div class="notice-title">
+                    <h3>2024年春季社区文化节活动安排</h3>
+                    <span class="notice-tag tag-normal">活动通知</span>
+                </div>
+                <div class="notice-meta">
+                    <span><i class="far fa-calendar"></i> 2024-03-15</span>
+                    <span><i class="far fa-clock"></i> 有效期至：2024-04-15</span>
+                </div>
+                <p>春季社区文化节将于4月1日-4月15日举行，活动内容包括广场舞比赛、书画展览等...</p>
+            </div>
+        </div>
+
+        <!-- 分页 -->
+        <div class="pagination">
+            <a href="#" class="active">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#">5</a>
+            <a href="#">&raquo;</a>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>联系我们</h3>
+                <p>地址：贵州省六盘水市钟山区大街城西路2号搬迁街</p>
+                <p>电话：13158289988</p>
+                <p>邮箱：1318940380@qq.com</p>
+            </div>
+            <div class="footer-section">
+                <h3>服务时间</h3>
+                <p>周一至周日</p>
+                <p>24小时服务</p>
+            </div>
+            <div class="footer-section">
+                <h3>关注我们</h3>
+                <p>微信公众号：六盘水华兴物业服务有限公司</p>
+                <p>服务热线：17708587286</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>版权所有 © 2025 六盘水华兴物业服务有限公司</p>
+        </div>
+    </footer>
+</body>
+</html> 

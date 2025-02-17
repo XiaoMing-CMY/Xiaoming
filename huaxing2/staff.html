@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>员工后台 - 六盘水华兴物业服务有限公司</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* 复用管理后台的基础样式 */
+        body {
+            margin: 0;
+            font-family: "Microsoft YaHei", sans-serif;
+            color: #333;
+        }
+
+        .staff-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: #1e4b94;
+            color: white;
+            padding: 2rem 0;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            background: #f5f5f5;
+        }
+
+        /* 工单列表样式 */
+        .service-request {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .request-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .request-title {
+            font-size: 1.2rem;
+            color: #1e4b94;
+        }
+
+        .request-status {
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .status-pending {
+            background: #ffeeba;
+            color: #856404;
+        }
+
+        .status-processing {
+            background: #b8daff;
+            color: #004085;
+        }
+
+        .status-completed {
+            background: #c3e6cb;
+            color: #155724;
+        }
+
+        .request-details {
+            margin: 1rem 0;
+        }
+
+        .request-meta {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .request-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .action-button {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .accept-button {
+            background: #1e4b94;
+            color: white;
+        }
+
+        .complete-button {
+            background: #28a745;
+            color: white;
+        }
+
+        .chat-button {
+            background: #17a2b8;
+            color: white;
+        }
+
+        /* 聊天窗口样式 */
+        .chat-window {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: none;
+        }
+
+        .chat-header {
+            background: #1e4b94;
+            color: white;
+            padding: 1rem;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-messages {
+            height: 300px;
+            padding: 1rem;
+            overflow-y: auto;
+        }
+
+        .chat-input {
+            padding: 1rem;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .chat-input button {
+            padding: 0.5rem 1rem;
+            background: #1e4b94;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="staff-container">
+        <!-- 侧边栏 -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <img src="logo.png.jpg" alt="六盘水华兴物业服务有限公司">
+                <h3>员工工作台</h3>
+            </div>
+            <ul class="sidebar-menu">
+                <li class="active">
+                    <i class="fas fa-tasks"></i> 待处理工单
+                </li>
+                <li>
+                    <i class="fas fa-history"></i> 历史工单
+                </li>
+                <li>
+                    <i class="fas fa-chart-bar"></i> 工作统计
+                </li>
+                <li onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> 退出登录
+                </li>
+            </ul>
+        </div>
+
+        <!-- 主要内容区域 -->
+        <div class="main-content">
+            <h2>待处理工单</h2>
+            
+            <!-- 工单列表 -->
+            <div class="service-request">
+                <div class="request-header">
+                    <span class="request-title">水管漏水维修申请</span>
+                    <span class="request-status status-pending">待处理</span>
+                </div>
+                <div class="request-details">
+                    <div class="request-meta">
+                        <p><i class="fas fa-user"></i> 申请人：张三</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 位置：华兴花园3栋2单元501</p>
+                        <p><i class="fas fa-clock"></i> 申请时间：2024-03-20 10:30</p>
+                    </div>
+                    <p>厨房水管漏水，地面已有积水，请尽快处理。</p>
+                </div>
+                <div class="request-actions">
+                    <button class="action-button accept-button">接受工单</button>
+                    <button class="action-button chat-button" onclick="openChat('张三')">联系业主</button>
+                </div>
+            </div>
+
+            <div class="service-request">
+                <div class="request-header">
+                    <span class="request-title">空调维修申请</span>
+                    <span class="request-status status-processing">处理中</span>
+                </div>
+                <div class="request-details">
+                    <div class="request-meta">
+                        <p><i class="fas fa-user"></i> 申请人：李四</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 位置：华兴花园5栋1单元302</p>
+                        <p><i class="fas fa-clock"></i> 申请时间：2024-03-20 09:15</p>
+                    </div>
+                    <p>空调制冷效果差，需要检修。</p>
+                </div>
+                <div class="request-actions">
+                    <button class="action-button complete-button">完成工单</button>
+                    <button class="action-button chat-button" onclick="openChat('李四')">联系业主</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 聊天窗口 -->
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+            <span id="chatTitle">与业主对话</span>
+            <i class="fas fa-times" onclick="closeChat()"></i>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <!-- 消息内容会动态添加 -->
+        </div>
+        <div class="chat-input">
+            <input type="text" placeholder="输入消息..." id="messageInput">
+            <button onclick="sendMessage()">发送</button>
+        </div>
+    </div>
+
+    <script>
+        function openChat(userName) {
+            const chatWindow = document.getElementById('chatWindow');
+            const chatTitle = document.getElementById('chatTitle');
+            chatTitle.textContent = `与${userName}对话`;
+            chatWindow.style.display = 'block';
+        }
+
+        function closeChat() {
+            document.getElementById('chatWindow').style.display = 'none';
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const messages = document.getElementById('chatMessages');
+            if (input.value.trim()) {
+                const message = document.createElement('div');
+                message.textContent = input.value;
+                message.style.textAlign = 'right';
+                message.style.margin = '0.5rem 0';
+                messages.appendChild(message);
+                input.value = '';
+                messages.scrollTop = messages.scrollHeight;
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('staffLoggedIn');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html> 
